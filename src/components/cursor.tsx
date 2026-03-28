@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useCallback } from "react";
 import { motion, useSpring } from "framer-motion";
 
+/**
+ * Custom cursor component using event delegation to avoid memory leaks.
+ * Only rendered on non-touch devices.
+ */
 export function Cursor() {
-  const [visible, setVisible] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-
   const springConfig = { stiffness: 150, damping: 18, mass: 0.5 };
   const x = useSpring(0, springConfig);
   const y = useSpring(0, springConfig);
@@ -16,27 +16,43 @@ export function Cursor() {
   const dotX = useSpring(0, dotSpring);
   const dotY = useSpring(0, dotSpring);
 
+  const hoverScale = useSpring(1, { stiffness: 300, damping: 20 });
+  const clickScale = useSpring(1, { stiffness: 400, damping: 25 });
+  const borderOpacity = useSpring(0.4, { stiffness: 200, damping: 20 });
+  const visible = useSpring(0, { stiffness: 300, damping: 30 });
+
   useEffect(() => {
+    // Skip on touch devices
+    if (typeof window !== "undefined" && "ontouchstart" in window) return;
+
     const move = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
       dotX.set(e.clientX);
       dotY.set(e.clientY);
-      setVisible(true);
+      visible.set(1);
     };
 
-    const down = () => setClicked(true);
-    const up = () => setClicked(false);
-    const leave = () => setVisible(false);
-    const enter = () => setVisible(true);
+    const down = () => clickScale.set(0.65);
+    const up = () => clickScale.set(1);
+    const leave = () => visible.set(0);
+    const enter = () => visible.set(1);
 
-    const addHover = () => {
-      document
-        .querySelectorAll("a, button, [data-cursor-hover]")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => setHovered(true));
-          el.addEventListener("mouseleave", () => setHovered(false));
-        });
+    // Event delegation for hover — no memory leak
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, [data-cursor-hover]")) {
+        hoverScale.set(1.5);
+        borderOpacity.set(0.8);
+      }
+    };
+
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button, [data-cursor-hover]")) {
+        hoverScale.set(1);
+        borderOpacity.set(0.4);
+      }
     };
 
     window.addEventListener("mousemove", move);
@@ -44,10 +60,8 @@ export function Cursor() {
     window.addEventListener("mouseup", up);
     document.documentElement.addEventListener("mouseleave", leave);
     document.documentElement.addEventListener("mouseenter", enter);
-    addHover();
-
-    const observer = new MutationObserver(addHover);
-    observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("mouseover", onMouseOver);
+    document.addEventListener("mouseout", onMouseOut);
 
     return () => {
       window.removeEventListener("mousemove", move);
@@ -55,60 +69,61 @@ export function Cursor() {
       window.removeEventListener("mouseup", up);
       document.documentElement.removeEventListener("mouseleave", leave);
       document.documentElement.removeEventListener("mouseenter", enter);
-      observer.disconnect();
+      document.removeEventListener("mouseover", onMouseOver);
+      document.removeEventListener("mouseout", onMouseOut);
     };
-  }, [x, y, dotX, dotY]);
+  }, [x, y, dotX, dotY, visible, hoverScale, clickScale, borderOpacity]);
 
+  // Hide cursor CSS only on non-touch devices
   return (
     <>
-      <style>{`* { cursor: none !important; }`}</style>
+      <style>{`
+        @media (hover: hover) and (pointer: fine) {
+          * { cursor: none !important; }
+        }
+      `}</style>
 
+      {/* Outer ring */}
       <motion.div
         style={{
           x,
           y,
           translateX: "-50%",
           translateY: "-50%",
-          opacity: visible ? 1 : 0,
+          opacity: visible,
+          scale: hoverScale,
           position: "fixed",
           top: 0,
           left: 0,
           zIndex: 99999,
+          width: 32,
+          height: 32,
           borderRadius: "9999px",
           border: "1px solid",
+          borderColor: "rgba(255,255,255,0.4)",
           pointerEvents: "none",
         }}
-        animate={{
-          width: hovered ? 48 : clicked ? 20 : 32,
-          height: hovered ? 48 : clicked ? 20 : 32,
-          borderColor: hovered
-            ? "rgba(255,255,255,0.8)"
-            : "rgba(255,255,255,0.4)",
-          backgroundColor: "rgba(0,0,0,0)",
-        }}
-        transition={{ duration: 0.2 }}
       />
 
+      {/* Inner dot */}
       <motion.div
         style={{
           x: dotX,
           y: dotY,
           translateX: "-50%",
           translateY: "-50%",
-          opacity: visible ? 1 : 0,
+          opacity: visible,
+          scale: clickScale,
           position: "fixed",
           top: 0,
           left: 0,
           zIndex: 99999,
+          width: 5,
+          height: 5,
           borderRadius: "9999px",
+          backgroundColor: "rgba(255,255,255,1)",
           pointerEvents: "none",
         }}
-        animate={{
-          width: clicked ? 3 : 5,
-          height: clicked ? 3 : 5,
-          backgroundColor: "rgba(255,255,255,1)",
-        }}
-        transition={{ duration: 0.15 }}
       />
     </>
   );

@@ -3,35 +3,40 @@
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
-  GlobeIcon,
+  EnvelopeSimpleIcon,
 } from "@phosphor-icons/react";
+import { social } from "@/data/social";
 
 export function Footer() {
   return (
     <footer className="w-full border-t border-white/5 bg-[#0a0a0a] py-16">
-      <div className="container max-w-7xl mx-auto px-10 flex flex-col items-center text-center gap-10">
+      <div className="container max-w-7xl mx-auto px-6 md:px-10 flex flex-col items-center text-center gap-10">
         <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">
-          © 2026 Pedro Henrique Sanson
+          © {new Date().getFullYear()} Pedro Henrique Sanson
         </div>
 
-        <nav className="flex gap-12 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+        <nav className="flex flex-wrap justify-center gap-8 md:gap-12 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
           <a
-            href="#"
+            href={social.github}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-primary-cyber transition-colors"
           >
             <GithubLogoIcon size={14} /> GITHUB
           </a>
           <a
-            href="#"
+            href={social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-primary-cyber transition-colors"
           >
             <LinkedinLogoIcon size={14} /> LINKEDIN
           </a>
           <a
-            href="#"
+            href={social.email}
             className="flex items-center gap-2 hover:text-primary-cyber transition-colors"
           >
-            <GlobeIcon size={14} /> SOURCE
+            <EnvelopeSimpleIcon size={14} /> EMAIL
           </a>
         </nav>
 

@@ -13,8 +13,9 @@ import {
   useTransform,
   useSpring,
 } from "framer-motion";
+import { social } from "@/data/social";
 
-// ─── Text reveal por palavra ──────────────────────────────────────────────────
+// ─── Text reveal by word ──────────────────────────────────────────────────────
 function WordReveal({ text, className }: { text: string; className?: string }) {
   const words = text.split(" ");
 
@@ -43,18 +44,18 @@ function WordReveal({ text, className }: { text: string; className?: string }) {
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Scroll-driven: conforme o usuário sai do hero, os elementos sobem e somem
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -120]),
-    { stiffness: 80, damping: 20 }
-  );
+  // All hooks called at the top level (fixed Rules of Hooks violation)
+  const rawY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const y = useSpring(rawY, { stiffness: 80, damping: 20 });
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 0.8], [0.06, 0]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
@@ -65,9 +66,9 @@ export function Hero() {
       ref={sectionRef}
       className="relative flex h-[calc(100vh-80px)] flex-col items-center justify-center text-center overflow-hidden"
     >
-      {/* Grid de fundo scroll-driven */}
+      {/* Background grid — scroll-driven */}
       <motion.div
-        style={{ opacity: useTransform(scrollYProgress, [0, 0.8], [0.06, 0]) }}
+        style={{ opacity: gridOpacity }}
         className="pointer-events-none absolute inset-0"
         aria-hidden
       >
@@ -81,8 +82,8 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* Conteúdo principal com parallax ao sair */}
-      <motion.div style={{ y, opacity, scale }} className="relative z-10">
+      {/* Main content with parallax */}
+      <motion.div style={{ y, opacity, scale }} className="relative z-10 px-4">
         {/* Badge */}
         <motion.span
           initial={{ opacity: 0, letterSpacing: "0.2em" }}
@@ -93,14 +94,14 @@ export function Hero() {
           system.initialization()
         </motion.span>
 
-        {/* Nome — reveal por letra */}
-        <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-8 uppercase leading-none">
+        {/* Name */}
+        <h1 className="text-6xl sm:text-7xl md:text-9xl font-bold tracking-tighter mb-8 uppercase leading-none">
           <WordReveal text="Pedro" />
           <br />
           <WordReveal text="Sanson" />
         </h1>
 
-        {/* Descrição */}
+        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,7 +112,7 @@ export function Hero() {
           Specialized in React, Next.js, TypeScript, and Tailwind.
         </motion.p>
 
-        {/* Botões com stagger */}
+        {/* Buttons with stagger */}
         <motion.div
           initial="hidden"
           animate="show"
@@ -119,41 +120,47 @@ export function Hero() {
             hidden: {},
             show: { transition: { staggerChildren: 0.12, delayChildren: 1.2 } },
           }}
-          className="flex gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          {[
-            {
-              label: "Github",
-              icon: <GithubLogoIcon weight="bold" className="w-4 h-4" />,
-              className:
-                "bg-primary-cyber hover:bg-[#6d28d9] rounded-none px-8 py-6 gap-3 uppercase tracking-widest font-bold text-xs transition-all",
-              variant: undefined,
-            },
-            {
-              label: "Linkedin",
-              icon: <LinkedinLogoIcon weight="bold" className="w-4 h-4" />,
-              className:
-                "border-white/20 rounded-none px-8 py-6 uppercase tracking-widest font-bold text-xs hover:bg-white/5 transition-all",
-              variant: "outline" as const,
-            },
-          ].map(({ label, icon, className, variant }) => (
-            <motion.div
-              key={label}
-              variants={{
-                hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-                },
-              }}
-            >
-              <Button variant={variant} className={className}>
-                {label} {icon}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+              show: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+              },
+            }}
+          >
+            <a href={social.github} target="_blank" rel="noopener noreferrer">
+              <Button
+                className="bg-primary-cyber hover:bg-[#6d28d9] rounded-none px-8 py-6 gap-3 uppercase tracking-widest font-bold text-xs transition-all w-full sm:w-auto"
+              >
+                Github <GithubLogoIcon weight="bold" className="w-4 h-4" />
               </Button>
-            </motion.div>
-          ))}
+            </a>
+          </motion.div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+              show: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+              },
+            }}
+          >
+            <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                className="border-white/20 rounded-none px-8 py-6 uppercase tracking-widest font-bold text-xs hover:bg-white/5 transition-all w-full sm:w-auto"
+              >
+                Linkedin <LinkedinLogoIcon weight="bold" className="w-4 h-4" />
+              </Button>
+            </a>
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -163,7 +170,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }}
+        style={{ opacity: scrollIndicatorOpacity }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group cursor-pointer z-10"
       >
         <CaretDoubleDownIcon
