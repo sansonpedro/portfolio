@@ -29,7 +29,10 @@ import {
   ApidogIcon,
 } from "@/components/icons/tool-icons";
 
-const iconMap: Record<string, ElementType<IconProps> | ComponentType<{ className?: string }>> = {
+const iconMap: Record<
+  string,
+  ElementType<IconProps> | ComponentType<{ className?: string }>
+> = {
   FileTs: TsIcon,
   FileJs: JsIcon,
   Code: CodeIcon,
@@ -57,7 +60,7 @@ export function TechStackSection() {
       <section id="tech-stack">
         <div className="flex items-center gap-4 mb-16">
           <h2 className="text-xl font-bold tracking-widest uppercase italic text-white/90">
-            Tech Stack
+            Arsenal
           </h2>
           <div className="h-px flex-1 bg-white/10" />
         </div>
