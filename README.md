@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="https://raw.githubusercontent.com/sansonpedro/portfolio/master/public/projects/codenow.webp" width="100%" alt="Portfolio Banner" />
 
-## Getting Started
+  # ⚡ Pedro Sanson | Full-Stack Portfolio
 
-First, run the development server:
+  ### _"Architecting scalable full-stack environments with precision."_
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-``` 
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel)](https://vercel.com/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+</div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<br />
 
-## Learn More
+## 🪐 Overview
 
-To learn more about Next.js, take a look at the following resources:
+This is my personal professional portfolio, designed with a **Neo-Cyber** aesthetic. It's not just a website; it's a high-performance digital experience built to showcase my journey as a Full-Stack Developer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application features smooth physics-based scrolling, custom 3D hover effects, and a performance-first architecture.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ The Arsenal
 
-## Deploy on Vercel
+My tech stack is built for scale, reliability, and speed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 💻 Languages & Frameworks
+- **Frontend**: React 19, Next.js 15 (App Router), Framer Motion, Tailwind CSS 4.
+- **Backend**: Node.js, Next.js API Routes, TypeScript.
+- **Tools**: PNPM, NPM, Git, Vercel, Linux.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🗄️ Databases & Infrastucture
+- **Relational**: PostgreSQL, MySQL.
+- **Graph**: Neo4j.
+- **Profiling**: DBeaver, Postman, ApiDog.
+
+## ✨ Core Principles
+
+- **High Performance**: Optimized for Core Web Vitals (LCP, FID, CLS).
+- **Accessibility**: Rigorously follows WAI-ARIA guidelines for an inclusive experience.
+- **Dynamic UX**: Uses Lenis for smooth scrolling and Framer Motion for micro-interactions.
+- **Clean Code**: Strict typing and component-driven architecture.
+
+## 📱 Featured Projects
+
+### 🧠 CodeNow
+- **Description**: A logic problems platform with an AI Tutor to help you learn and practice algorithms and data structures.
+- **Tech**: Next.js 15, Shadcn/UI, Tailwind CSS, AI Integration.
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- PNPM (recommended)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sansonpedro/portfolio.git
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   pnpm dev
+   ```
+
+## 📬 Say Hello
+
+I'm always open to discussing new projects, creative ideas, or opportunities.
+
+- **LinkedIn**: [Pedro Henrique Sanson](https://www.linkedin.com/in/pedro-henrique-sanson-124568354/)
+- **Email**: [contato@sanson.pedroh@gmail.com](mailto:contato@sanson.pedroh@gmail.com)
+- **GitHub**: [@sansonpedro](https://github.com/sansonpedro)
+
+---
+
+<div align="center">
+  <sub>Built with Excellence by Pedro Sanson</sub>
+</div>
