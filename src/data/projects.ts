@@ -20,8 +20,8 @@ export const projects: Project[] = [
   {
     title: "CodeNow",
     description:
-      "Event-driven architecture platform for building scalable microservices with message queuing.",
-    tags: ["Next", "Shadcn/UI", "Tailwind"],
+      "Logic problems platform with a Ai Tutor for help you to learn and practice algorithms and data structures.",
+    tags: ["Next.js", "Shadcn/UI", "Tailwind"],
     image: "/projects/codenow.webp",
     github: "#",
     live: "#",
