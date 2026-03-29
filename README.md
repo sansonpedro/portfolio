@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/sansonpedro/portfolio/master/public/projects/codenow.webp" width="100%" alt="Portfolio Banner" />
 
   # ⚡ Pedro Sanson | Full-Stack Portfolio
 
