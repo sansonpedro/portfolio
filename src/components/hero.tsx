@@ -15,7 +15,6 @@ import {
 } from "framer-motion";
 import { social } from "@/data/social";
 
-// ─── Text reveal by word ──────────────────────────────────────────────────────
 function WordReveal({ text, className }: { text: string; className?: string }) {
   const words = text.split(" ");
 
@@ -40,7 +39,6 @@ function WordReveal({ text, className }: { text: string; className?: string }) {
   );
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -49,7 +47,6 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // All hooks called at the top level (fixed Rules of Hooks violation)
   const rawY = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const y = useSpring(rawY, { stiffness: 80, damping: 20 });
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
@@ -66,7 +63,6 @@ export function Hero() {
       ref={sectionRef}
       className="relative flex h-[calc(100vh-80px)] flex-col items-center justify-center text-center overflow-hidden"
     >
-      {/* Background grid — scroll-driven */}
       <motion.div
         style={{ opacity: gridOpacity }}
         className="pointer-events-none absolute inset-0"
@@ -82,9 +78,7 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* Main content with parallax */}
       <motion.div style={{ y, opacity, scale }} className="relative z-10 px-4">
-        {/* Badge */}
         <motion.span
           initial={{ opacity: 0, letterSpacing: "0.2em" }}
           animate={{ opacity: 1, letterSpacing: "0.4em" }}
@@ -94,14 +88,12 @@ export function Hero() {
           system.initialization()
         </motion.span>
 
-        {/* Name */}
         <h1 className="text-6xl sm:text-7xl md:text-9xl font-bold tracking-tighter mb-8 uppercase leading-none">
           <WordReveal text="Pedro" />
           <br />
           <WordReveal text="Sanson" />
         </h1>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,7 +104,6 @@ export function Hero() {
           Specialized in React, Next.js, TypeScript, and Tailwind.
         </motion.p>
 
-        {/* Buttons with stagger */}
         <motion.div
           initial="hidden"
           animate="show"
@@ -164,7 +155,6 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.button
         onClick={scrollToContent}
         initial={{ opacity: 0 }}

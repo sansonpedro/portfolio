@@ -16,22 +16,21 @@ interface Feature {
 
 const featuresData: Feature[] = [
   {
-    title: "Alta Performance",
+    title: "High Performance",
     description:
-      "Otimizado para entregar a melhor experiência e pontuação no Core Web Vitals.",
+      "Optimized to deliver the best experience and Core Web Vitals scores.",
   },
   {
-    title: "Acessibilidade",
+    title: "Accessibility",
     description:
-      "Componentes desenhados seguindo rigorosamente as diretrizes WAI-ARIA.",
+      "Components designed following WAI-ARIA guidelines rigorously.",
   },
   {
-    title: "Tipografia Dinâmica",
-    description: "Utilizando JetBrains Mono em todo o ecossistema do projeto.",
+    title: "Dynamic Typography",
+    description: "Using JetBrains Mono across the entire project ecosystem.",
   },
 ];
 
-// ─── Card individual animado pelo scroll ─────────────────────────────────────
 function FeatureCard({
   feature,
   progress,
@@ -43,7 +42,6 @@ function FeatureCard({
   index: number;
   total: number;
 }) {
-  // Cada card tem sua própria janela de progresso
   const start = index / total;
   const end = (index + 1) / total;
 
@@ -59,7 +57,6 @@ function FeatureCard({
       style={{ opacity, y: smoothY, filter }}
       className="flex flex-col items-center justify-center space-y-2 rounded-lg border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur-sm"
     >
-      {/* Número do card */}
       <span className="text-xs tracking-widest text-white/20 uppercase mb-2">
         0{index + 1}
       </span>
@@ -71,7 +68,6 @@ function FeatureCard({
   );
 }
 
-// ─── FeaturesSection com StickyProgress ──────────────────────────────────────
 export function FeaturesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -82,30 +78,24 @@ export function FeaturesSection() {
 
   const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  // Barra de progresso no topo
   const scaleX = useTransform(progress, [0, 1], [0, 1]);
 
-  // Título fades conforme scrolla
   const titleOpacity = useTransform(progress, [0, 0.15], [1, 0.3]);
   const titleY = useTransform(progress, [0, 0.3], [0, -30]);
   const smoothTitleY = useSpring(titleY, { stiffness: 80, damping: 20 });
 
   return (
-    // Altura total = sticky + scroll room pra cada card
     <div
       ref={sectionRef}
       style={{ height: `${100 + featuresData.length * 60}vh` }}
     >
-      {/* Barra de progresso */}
       <motion.div
         style={{ scaleX, transformOrigin: "left" }}
         className="fixed top-0 left-0 right-0 h-0.5 bg-primary-cyber z-50 origin-left"
       />
 
-      {/* Área sticky */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
         <div className="container max-w-5xl w-full px-4">
-          {/* Header */}
           <motion.div
             style={{ opacity: titleOpacity, y: smoothTitleY }}
             className="flex flex-col items-center space-y-4 text-center mb-16"
@@ -117,14 +107,14 @@ export function FeaturesSection() {
               transition={{ duration: 1 }}
               className="text-[10px] tracking-[0.4em] text-white/30 uppercase"
             >
-              recursos principais
+              core principles
             </motion.span>
             <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl">
-              Recursos Principais
+              Core Principles
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Tudo o que você precisa para alavancar seu produto com um design
-              system consistente.
+              Everything you need to build products with a consistent design
+              system and scalable architecture.
             </p>
           </motion.div>
 

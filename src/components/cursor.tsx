@@ -1,12 +1,8 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { motion, useSpring } from "framer-motion";
 
-/**
- * Custom cursor component using event delegation to avoid memory leaks.
- * Only rendered on non-touch devices.
- */
 export function Cursor() {
   const springConfig = { stiffness: 150, damping: 18, mass: 0.5 };
   const x = useSpring(0, springConfig);
@@ -22,7 +18,6 @@ export function Cursor() {
   const visible = useSpring(0, { stiffness: 300, damping: 30 });
 
   useEffect(() => {
-    // Skip on touch devices
     if (typeof window !== "undefined" && "ontouchstart" in window) return;
 
     const move = (e: MouseEvent) => {
@@ -38,7 +33,6 @@ export function Cursor() {
     const leave = () => visible.set(0);
     const enter = () => visible.set(1);
 
-    // Event delegation for hover — no memory leak
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest("a, button, [data-cursor-hover]")) {
@@ -74,7 +68,6 @@ export function Cursor() {
     };
   }, [x, y, dotX, dotY, visible, hoverScale, clickScale, borderOpacity]);
 
-  // Hide cursor CSS only on non-touch devices
   return (
     <>
       <style>{`
@@ -83,7 +76,6 @@ export function Cursor() {
         }
       `}</style>
 
-      {/* Outer ring */}
       <motion.div
         style={{
           x,
@@ -105,7 +97,6 @@ export function Cursor() {
         }}
       />
 
-      {/* Inner dot */}
       <motion.div
         style={{
           x: dotX,

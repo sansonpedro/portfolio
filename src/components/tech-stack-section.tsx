@@ -7,24 +7,29 @@ import {
   GitBranch as GitBranchIcon,
   Terminal as TerminalIcon,
   Cpu as CpuIcon,
-  Browser as BrowserIcon,
-  Cards as CardsIcon,
   Code as CodeIcon,
   FileTs as TsIcon,
   FileJs as JsIcon,
   Lightning as LightningIcon,
   Globe as GlobeIcon,
   Atom as ReactIcon,
-  TerminalWindowIcon,
-  CameraPlusIcon,
-  BrowsersIcon,
 } from "@phosphor-icons/react";
-import type { ElementType } from "react";
+import type { ElementType, ComponentType } from "react";
 import type { IconProps } from "@phosphor-icons/react";
 import { skillCategories } from "@/data/skills";
+import {
+  DbeaverIcon,
+  PostmanIcon,
+  Neo4jIcon,
+  NpmIcon,
+  PnpmIcon,
+  LinuxIcon,
+  GitIcon,
+  VercelIcon,
+  ApidogIcon,
+} from "@/components/icons/tool-icons";
 
-// Map icon names to actual components
-const iconMap: Record<string, ElementType<IconProps>> = {
+const iconMap: Record<string, ElementType<IconProps> | ComponentType<{ className?: string }>> = {
   FileTs: TsIcon,
   FileJs: JsIcon,
   Code: CodeIcon,
@@ -32,14 +37,18 @@ const iconMap: Record<string, ElementType<IconProps>> = {
   Globe: GlobeIcon,
   Lightning: LightningIcon,
   Database: DatabaseIcon,
-  TerminalWindow: TerminalWindowIcon,
-  CameraPlus: CameraPlusIcon,
-  Browsers: BrowsersIcon,
   GitBranch: GitBranchIcon,
-  Cards: CardsIcon,
   Terminal: TerminalIcon,
   Cpu: CpuIcon,
-  Browser: BrowserIcon,
+  DBeaver: DbeaverIcon,
+  Postman: PostmanIcon,
+  Neo4j: Neo4jIcon,
+  Npm: NpmIcon,
+  Pnpm: PnpmIcon,
+  Linux: LinuxIcon,
+  Git: GitIcon,
+  Vercel: VercelIcon,
+  Apidog: ApidogIcon,
 };
 
 export function TechStackSection() {
@@ -48,7 +57,7 @@ export function TechStackSection() {
       <section id="tech-stack">
         <div className="flex items-center gap-4 mb-16">
           <h2 className="text-xl font-bold tracking-widest uppercase italic text-white/90">
-            Tech_Stack
+            Tech Stack
           </h2>
           <div className="h-px flex-1 bg-white/10" />
         </div>

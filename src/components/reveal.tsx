@@ -2,10 +2,8 @@
 
 import { motion } from "framer-motion";
 
-// ─── Shared viewport config ───────────────────────────────────────────────────
 const VIEWPORT = { once: true, margin: "-150px" };
 
-// ─── 1. Default — Fade + slide up (your original) ────────────────────────────
 export function Reveal({ children }: { children: React.ReactNode }) {
   return (
     <motion.div

@@ -5,7 +5,7 @@ export function ExperienceTimeline() {
     <section id="experience" className="w-full">
       <div className="flex items-center gap-4 mb-12">
         <h2 className="text-xl font-bold tracking-[0.3em] uppercase italic text-white/90">
-          Work_History
+          Journey
         </h2>
         <div className="h-px flex-1 bg-white/10" />
       </div>

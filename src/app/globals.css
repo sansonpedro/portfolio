@@ -12,3 +12,11 @@ body {
   font-family: var(--font-mono);
   background-size: 40px 40px;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

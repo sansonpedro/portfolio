@@ -2,7 +2,7 @@ import type { ElementType } from "react";
 import type { IconProps } from "@phosphor-icons/react";
 
 export interface Skill {
-  icon: string; // icon component name — resolved in the component
+  icon: string;
   name: string;
   type?: string;
 }
@@ -10,7 +10,7 @@ export interface Skill {
 export interface SkillCategory {
   number: string;
   label: string;
-  layout?: "grid"; // optional: "grid" for 2-col layout (tools section)
+  layout?: "grid";
   items: Skill[];
 }
 
@@ -39,20 +39,22 @@ export const skillCategories: SkillCategory[] = [
     items: [
       { icon: "Database", name: "MySQL", type: "Relational" },
       { icon: "Database", name: "PostgreSQL", type: "Relational" },
-      { icon: "Lightning", name: "Redis", type: "In-memory" },
+      { icon: "Neo4j", name: "Neo4j", type: "Graph" },
     ],
   },
   {
     number: "04",
-    label: "Tools",
+    label: "Tools & Infra",
     layout: "grid",
     items: [
-      { icon: "TerminalWindow", name: "Dbeaver" },
-      { icon: "CameraPlus", name: "Postman" },
-      { icon: "Browsers", name: "ApiDog" },
-      { icon: "GitBranch", name: "Git" },
-      { icon: "Lightning", name: "Vercel" },
-      { icon: "Cards", name: "Debugger" },
+      { icon: "DBeaver", name: "DBeaver" },
+      { icon: "Postman", name: "Postman" },
+      { icon: "Apidog", name: "ApiDog" },
+      { icon: "Git", name: "Git" },
+      { icon: "Vercel", name: "Vercel" },
+      { icon: "Linux", name: "Linux" },
+      { icon: "Npm", name: "npm" },
+      { icon: "Pnpm", name: "pnpm" },
     ],
   },
 ];

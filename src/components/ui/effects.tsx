@@ -545,7 +545,6 @@ export function ChromaticAberration({
       >
         {children}
       </motion.span>
-      {/* Original */}
       <span style={{ position: "relative" }}>{children}</span>
     </span>
   );

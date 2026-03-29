@@ -38,14 +38,14 @@ export function ContactSection() {
     <section id="contact" className="w-full">
       <div className="flex items-center gap-4 mb-16">
         <h2 className="text-xl font-bold tracking-[0.3em] uppercase italic text-white/90">
-          Contact
+          Say Hello
         </h2>
         <div className="h-px flex-1 bg-white/10" />
       </div>
 
       <div className="text-center mb-12">
         <span className="text-[10px] tracking-[0.4em] text-white/30 uppercase font-bold block mb-4">
-          Get_In_Touch
+          Open for Opportunities
         </span>
         <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none mb-6">
           Let&apos;s Build<br />Something Great

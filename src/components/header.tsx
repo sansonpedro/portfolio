@@ -1,16 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 
 const navLinks = [
-  { href: "#tech-stack", label: "Stack" },
+  { href: "#tech-stack", label: "Tech Stack" },
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#experience", label: "Journey" },
+  { href: "#contact", label: "Say Hello" },
 ];
+
+function scrollToSection(href: string) {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const headerHeight = 80;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+  window.scrollTo({ top, behavior: "smooth" });
+}
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,20 +31,18 @@ export function Header() {
         DEV.PEDRO
       </div>
 
-      {/* Desktop nav */}
       <nav className="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
         {navLinks.map((link) => (
-          <Link
+          <button
             key={link.href}
-            href={link.href}
-            className="hover:text-primary-cyber transition-colors"
+            onClick={() => scrollToSection(link.href)}
+            className="hover:text-primary-cyber transition-colors cursor-pointer"
           >
             {link.label}
-          </Link>
+          </button>
         ))}
       </nav>
 
-      {/* Mobile hamburger */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
         className="md:hidden text-white/60 hover:text-primary-cyber transition-colors z-50"
@@ -43,7 +51,6 @@ export function Header() {
         {mobileOpen ? <XIcon size={24} weight="bold" /> : <ListIcon size={24} weight="bold" />}
       </button>
 
-      {/* Mobile menu overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -60,13 +67,15 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
               >
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-2xl font-bold uppercase tracking-widest text-white/70 hover:text-primary-cyber transition-colors"
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    scrollToSection(link.href);
+                  }}
+                  className="text-2xl font-bold uppercase tracking-widest text-white/70 hover:text-primary-cyber transition-colors cursor-pointer"
                 >
                   {link.label}
-                </Link>
+                </button>
               </motion.div>
             ))}
           </motion.div>
