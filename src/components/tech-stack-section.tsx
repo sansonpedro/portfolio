@@ -60,7 +60,7 @@ export function TechStackSection() {
       <section id="tech-stack">
         <div className="flex items-center gap-4 mb-16">
           <h2 className="text-xl font-bold tracking-widest uppercase italic text-white/90">
-            Arsenal
+            Tech Stack
           </h2>
           <div className="h-px flex-1 bg-white/10" />
         </div>

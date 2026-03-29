@@ -242,9 +242,6 @@ export function ProjectsSection() {
     <section id="projects" className="w-full">
       <div className="flex justify-between items-end mb-12 px-6 md:px-0">
         <div>
-          <span className="text-[10px] tracking-[0.4em] text-white/30 uppercase font-bold">
-            Case Studies
-          </span>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter mt-4 leading-none">
             Projects
           </h2>
